@@ -1,0 +1,154 @@
+﻿  example.cpp
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_sdl.cpp
+  imgui_impl_sdlrenderer.cpp
+  imgui_sdl.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
+  main.cpp
+C:\Work\SDLProjects\SpceShooterAssignment\src\enemyBase.h(44,23): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Work\SDLProjects\SpceShooterAssignment\src\textSprite.h(7,18): warning C4099: 'SDL_Surface': type name first seen using 'struct' now seen using 'class'
+C:\Work\SDLProjects\SpceShooterAssignment\include\SDL2\SDL_surface.h(72,16): message : see declaration of 'SDL_Surface'
+C:\Work\SDLProjects\SpceShooterAssignment\src\textSprite.h(8,18): warning C4099: 'SDL_Texture': type name first seen using 'struct' now seen using 'class'
+C:\Work\SDLProjects\SpceShooterAssignment\include\SDL2\SDL_render.h(147,8): message : see declaration of 'SDL_Texture'
+C:\Work\SDLProjects\SpceShooterAssignment\main.cpp(38,97): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Work\SDLProjects\SpceShooterAssignment\main.cpp(38,84): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  binarySearch.cpp
+  collision.cpp
+  dataStructuresAndMethods.cpp
+C:\Work\SDLProjects\SpceShooterAssignment\src\dataStructuresAndMethods.cpp(20,64): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Work\SDLProjects\SpceShooterAssignment\src\dataStructuresAndMethods.cpp(20,48): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  debugDrawer.cpp
+C:\Work\SDLProjects\SpceShooterAssignment\src\debugDrawer.cpp(47,28): warning C4838: conversion from 'T' to 'int' requires a narrowing conversion
+          with
+          [
+              T=float
+          ]
+C:\Work\SDLProjects\SpceShooterAssignment\src\debugDrawer.cpp(47,28): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Work\SDLProjects\SpceShooterAssignment\src\debugDrawer.cpp(48,28): warning C4838: conversion from 'T' to 'int' requires a narrowing conversion
+          with
+          [
+              T=float
+          ]
+C:\Work\SDLProjects\SpceShooterAssignment\src\debugDrawer.cpp(48,28): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Work\SDLProjects\SpceShooterAssignment\src\debugDrawer.cpp(49,23): warning C4838: conversion from 'T' to 'int' requires a narrowing conversion
+          with
+          [
+              T=float
+          ]
+C:\Work\SDLProjects\SpceShooterAssignment\src\debugDrawer.cpp(49,23): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Work\SDLProjects\SpceShooterAssignment\src\debugDrawer.cpp(50,23): warning C4838: conversion from 'T' to 'int' requires a narrowing conversion
+          with
+          [
+              T=float
+          ]
+C:\Work\SDLProjects\SpceShooterAssignment\src\debugDrawer.cpp(50,23): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Work\SDLProjects\SpceShooterAssignment\src\debugDrawer.cpp(62,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Work\SDLProjects\SpceShooterAssignment\src\debugDrawer.cpp(79,34): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Work\SDLProjects\SpceShooterAssignment\src\debugDrawer.cpp(78,34): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Work\SDLProjects\SpceShooterAssignment\src\debugDrawer.cpp(77,34): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Work\SDLProjects\SpceShooterAssignment\src\debugDrawer.cpp(76,34): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  enemyBase.cpp
+C:\Work\SDLProjects\SpceShooterAssignment\src\enemyBase.h(44,23): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Work\SDLProjects\SpceShooterAssignment\src\textSprite.h(7,18): warning C4099: 'SDL_Surface': type name first seen using 'struct' now seen using 'class'
+C:\Work\SDLProjects\SpceShooterAssignment\include\SDL2\SDL_surface.h(72,16): message : see declaration of 'SDL_Surface'
+C:\Work\SDLProjects\SpceShooterAssignment\src\textSprite.h(8,18): warning C4099: 'SDL_Texture': type name first seen using 'struct' now seen using 'class'
+C:\Work\SDLProjects\SpceShooterAssignment\include\SDL2\SDL_render.h(147,8): message : see declaration of 'SDL_Texture'
+  enemyManager.cpp
+C:\Work\SDLProjects\SpceShooterAssignment\src\enemyBase.h(44,23): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Work\SDLProjects\SpceShooterAssignment\src\enemyManager.cpp(150,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Work\SDLProjects\SpceShooterAssignment\src\enemyManager.cpp(170,39): warning C4018: '<=': signed/unsigned mismatch
+C:\Work\SDLProjects\SpceShooterAssignment\src\enemyManager.cpp(184,42): warning C4018: '<=': signed/unsigned mismatch
+C:\Work\SDLProjects\SpceShooterAssignment\src\enemyManager.cpp(188,42): warning C4018: '>': signed/unsigned mismatch
+  enemyWizard.cpp
+C:\Work\SDLProjects\SpceShooterAssignment\src\enemyBase.h(44,23): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Work\SDLProjects\SpceShooterAssignment\src\textSprite.h(7,18): warning C4099: 'SDL_Surface': type name first seen using 'struct' now seen using 'class'
+C:\Work\SDLProjects\SpceShooterAssignment\include\SDL2\SDL_surface.h(72,16): message : see declaration of 'SDL_Surface'
+C:\Work\SDLProjects\SpceShooterAssignment\src\textSprite.h(8,18): warning C4099: 'SDL_Texture': type name first seen using 'struct' now seen using 'class'
+C:\Work\SDLProjects\SpceShooterAssignment\include\SDL2\SDL_render.h(147,8): message : see declaration of 'SDL_Texture'
+C:\Work\SDLProjects\SpceShooterAssignment\src\enemyWizard.cpp(65,9): warning C4244: 'return': conversion from 'const unsigned int' to 'const float', possible loss of data
+  gameEngine.cpp
+C:\Work\SDLProjects\SpceShooterAssignment\src\enemyBase.h(44,23): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Work\SDLProjects\SpceShooterAssignment\src\textSprite.h(7,18): warning C4099: 'SDL_Surface': type name first seen using 'struct' now seen using 'class'
+C:\Work\SDLProjects\SpceShooterAssignment\include\SDL2\SDL_surface.h(72,16): message : see declaration of 'SDL_Surface'
+C:\Work\SDLProjects\SpceShooterAssignment\src\textSprite.h(8,18): warning C4099: 'SDL_Texture': type name first seen using 'struct' now seen using 'class'
+C:\Work\SDLProjects\SpceShooterAssignment\include\SDL2\SDL_render.h(147,8): message : see declaration of 'SDL_Texture'
+  imGuiManager.cpp
+C:\Work\SDLProjects\SpceShooterAssignment\src\imGuiManager.cpp(10,46): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Work\SDLProjects\SpceShooterAssignment\src\imGuiManager.cpp(10,33): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  enemyFighter.cpp
+C:\Work\SDLProjects\SpceShooterAssignment\src\enemyBase.h(44,23): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Work\SDLProjects\SpceShooterAssignment\src\textSprite.h(7,18): warning C4099: 'SDL_Surface': type name first seen using 'struct' now seen using 'class'
+C:\Work\SDLProjects\SpceShooterAssignment\include\SDL2\SDL_surface.h(72,16): message : see declaration of 'SDL_Surface'
+C:\Work\SDLProjects\SpceShooterAssignment\src\textSprite.h(8,18): warning C4099: 'SDL_Texture': type name first seen using 'struct' now seen using 'class'
+C:\Work\SDLProjects\SpceShooterAssignment\include\SDL2\SDL_render.h(147,8): message : see declaration of 'SDL_Texture'
+C:\Work\SDLProjects\SpceShooterAssignment\src\enemyFighter.cpp(62,9): warning C4244: 'return': conversion from 'const unsigned int' to 'const float', possible loss of data
+  Compiling...
+  playerCharacter.cpp
+C:\Work\SDLProjects\SpceShooterAssignment\src\textSprite.h(7,18): warning C4099: 'SDL_Surface': type name first seen using 'struct' now seen using 'class'
+C:\Work\SDLProjects\SpceShooterAssignment\include\SDL2\SDL_surface.h(72,16): message : see declaration of 'SDL_Surface'
+C:\Work\SDLProjects\SpceShooterAssignment\src\textSprite.h(8,18): warning C4099: 'SDL_Texture': type name first seen using 'struct' now seen using 'class'
+C:\Work\SDLProjects\SpceShooterAssignment\include\SDL2\SDL_render.h(147,8): message : see declaration of 'SDL_Texture'
+C:\Work\SDLProjects\SpceShooterAssignment\src\enemyBase.h(44,23): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  projectile.cpp
+C:\Work\SDLProjects\SpceShooterAssignment\src\enemyBase.h(44,23): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  projectileManager.cpp
+C:\Work\SDLProjects\SpceShooterAssignment\src\enemyBase.h(44,23): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Work\SDLProjects\SpceShooterAssignment\src\textSprite.h(7,18): warning C4099: 'SDL_Surface': type name first seen using 'struct' now seen using 'class'
+C:\Work\SDLProjects\SpceShooterAssignment\include\SDL2\SDL_surface.h(72,16): message : see declaration of 'SDL_Surface'
+C:\Work\SDLProjects\SpceShooterAssignment\src\textSprite.h(8,18): warning C4099: 'SDL_Texture': type name first seen using 'struct' now seen using 'class'
+C:\Work\SDLProjects\SpceShooterAssignment\include\SDL2\SDL_render.h(147,8): message : see declaration of 'SDL_Texture'
+C:\Work\SDLProjects\SpceShooterAssignment\src\projectileManager.cpp(13,58): warning C4244: 'argument': conversion from 'float' to 'const unsigned __int64', possible loss of data
+C:\Work\SDLProjects\SpceShooterAssignment\src\projectileManager.cpp(170,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  quadTree.cpp
+C:\Work\SDLProjects\SpceShooterAssignment\src\enemyBase.h(44,23): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  sprite.cpp
+  spriteSheet.cpp
+  steeringBehaviour.cpp
+C:\Work\SDLProjects\SpceShooterAssignment\src\enemyBase.h(44,23): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  textSprite.cpp
+C:\Work\SDLProjects\SpceShooterAssignment\src\textSprite.h(7,18): warning C4099: 'SDL_Surface': type name first seen using 'struct' now seen using 'class'
+C:\Work\SDLProjects\SpceShooterAssignment\include\SDL2\SDL_surface.h(72,16): message : see declaration of 'SDL_Surface'
+C:\Work\SDLProjects\SpceShooterAssignment\src\textSprite.h(8,18): warning C4099: 'SDL_Texture': type name first seen using 'struct' now seen using 'class'
+C:\Work\SDLProjects\SpceShooterAssignment\include\SDL2\SDL_render.h(147,8): message : see declaration of 'SDL_Texture'
+C:\Work\SDLProjects\SpceShooterAssignment\src\textSprite.cpp(28,23): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+C:\Work\SDLProjects\SpceShooterAssignment\src\textSprite.cpp(28,23): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Work\SDLProjects\SpceShooterAssignment\src\textSprite.cpp(28,30): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+C:\Work\SDLProjects\SpceShooterAssignment\src\textSprite.cpp(28,30): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  timer.cpp
+  timerManager.cpp
+LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/LTCG' specification
+  Generating code
+C:\Work\SDLProjects\SpceShooterAssignment\src\quadTree.cpp(58): warning C4715: 'QuadTreeTemp<Projectile *>::InsertTemp': not all control paths return a value
+C:\Work\SDLProjects\SpceShooterAssignment\src\quadTree.cpp(58): warning C4715: 'QuadTreeTemp<EnemyBase *>::InsertTemp': not all control paths return a value
+  1074 of 3137 functions (34.2%) were compiled, the rest were copied from previous compilation.
+    589 functions were new in current compilation
+    122 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  SpaceShooterAssignment.vcxproj -> C:\Work\SDLProjects\SpceShooterAssignment\x64\Release\SpaceShooterAssignment.exe

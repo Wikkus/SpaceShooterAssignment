@@ -1,11 +1,10 @@
 #include "gameEngine.h"
 
 #include "debugDrawer.h"
-#include "enemyBase.h"
 #include "enemyManager.h"
 #include "imGuiManager.h"
 #include "playerCharacter.h"
-#include "quadTree.h"
+#include "projectileManager.h"
 #include "steeringBehaviour.h"
 #include "timerManager.h"
 
@@ -18,12 +17,7 @@ std::shared_ptr<EnemyManager> enemyManager;
 std::shared_ptr<DebugDrawer> debugDrawer;
 std::shared_ptr<ImGuiHandler> imGuiHandler;
 std::shared_ptr<PlayerCharacter> playerCharacter;
-
 std::shared_ptr<ProjectileManager> projectileManager;
-
-QuadTreeTemp<EnemyBase*>* enemyQuadTree;
-QuadTreeTemp<Projectile*>* projectileQuadTree;
-
 std::shared_ptr<SteeringBehaviour> separationBehaviour;
 std::shared_ptr<TimerManager> timerManager;
 

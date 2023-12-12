@@ -1,8 +1,11 @@
 #pragma once
 #include "projectile.h"
 
+#include <unordered_map>
 #include <vector>
 
+template<typename T> class ObjectPool;
+template<typename T> class QuadTree;
 
 class ProjectileManager {
 public:
@@ -13,34 +16,35 @@ public:
 	void Update();
 	void Render();
 
-	bool CheckCollision(DamageType damageType, unsigned int projectileIndex);
+	bool CheckCollision(ProjectileType projectileType, unsigned int projectileIndex);
 
-	void AddNewProjectile(DamageType damageType, float orientation, unsigned int projectileDamage,
+	void ClearProjectileQuadTree();
+	void CreateNewProjectile(ProjectileType projectileType, float orientation, unsigned int projectileDamage,
 		Vector2<float> direction, Vector2<float> position);
-	void InsertProjectile(DamageType damageType, std::vector<Projectile*>& projectiles, Projectile* projectile);
-	void SpawnProjectile(DamageType damageType, float orientation, Vector2<float> direction, Vector2<float> position);
+	void SpawnProjectile(ProjectileType projectileType, float orientation, unsigned int projectileDamage, Vector2<float> direction, Vector2<float> position);
 	void RemoveAllProjectiles();
-	void RemoveProjectile(DamageType damageType, unsigned int projectileIndex);
+	void RemoveProjectile(ProjectileType projectileType, unsigned int projectileIndex);
 
 	void UpdateQuadTree();
 
-	std::vector<Projectile*> GetActiveProjectiles();
+	std::shared_ptr<QuadTree<std::shared_ptr<Projectile>>> GetProjectileQuadTree();
 
-	int BinarySearch(std::vector<Projectile*> projectiles, unsigned int targetID);
+	int BinarySearch(int low, int high, int targetID);
+
+	int Partition(int start, int end);
+	void QuickSort(int start, int end);
 
 private:
-	std::vector<Projectile*> _activeEnemyProjectiles;
-	std::vector<Projectile*> _inactiveEnemyProjectiles;
+	std::unordered_map<ProjectileType, std::shared_ptr<ObjectPool<std::shared_ptr<Projectile>>>> _projectilePools;
+	std::vector<std::shared_ptr<Projectile>> _activeProjectiles;
 
-	std::vector<Projectile*> _activePlayerProjectiles;
-	std::vector<Projectile*> _inactivePlayerProjectiles;
+	std::shared_ptr<QuadTree<std::shared_ptr<Projectile>>> _projectileQuadTree;
 
-	Circle _intersectedCollider;
-	Circle _currentCollider;
-	const unsigned int _enemyProjectileDamage = 2;
-	const unsigned int _playerProjectileDamage = 30;
+	unsigned int _projectileAmountLimit = 2000;
+	unsigned int _numberOfProjectileTypes = 0;
 
-	unsigned int _activeProjectileLimit = 5000;
 	unsigned int _lastProjectileID = 0;
+	int _latestProjectileIndex = -1;
+
 };
 

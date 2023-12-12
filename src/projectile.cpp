@@ -5,55 +5,54 @@
 #include "enemyManager.h"
 #include "gameEngine.h"
 
-Projectile::Projectile(DamageType damageType, unsigned int projectileDamage, unsigned int projectileID) {
-	_projectileSprite = new Sprite();
-	if (damageType == DamageType::DamageEnemy) {
-		_projectileSprite->Load("res/sprites/Fireball.png");
+Projectile::Projectile(ProjectileType projectileType, unsigned int projectileDamage, unsigned int objectID) : ObjectBase(objectID) {
+	_sprite = new Sprite();
+	if (projectileType == ProjectileType::EnemyProjectile) {
+		_sprite->Load("res/sprites/Fireball.png");
 
-	} else if (damageType == DamageType::DamagePlayer) {
-		_projectileSprite->Load("res/sprites/Arcaneball.png");
+	} else if (projectileType == ProjectileType::PlayerProjectile) {
+		_sprite->Load("res/sprites/Arcaneball.png");
 	}
-	_damageType = damageType;
+	_projectileType = projectileType;
 	_projectileDamage = projectileDamage;
-	_projectileID = projectileID;	
 
 	_circleCollider.radius = 8.f;
 	_circleCollider.position = _position;
 }
 
 Projectile::~Projectile() {
-	_projectileSprite = nullptr;
-	delete _projectileSprite;
+	_sprite = nullptr;
+	delete _sprite;
 }
 
 void Projectile::Init() {}
 
 void Projectile::Update() {
 	_position += _direction * _projectileSpeed * deltaTime;
-	_circleCollider.position = _position + _direction * (_projectileSprite->h * 0.25f);
+	_circleCollider.position = _position + _direction * (_sprite->h * 0.25f);
 }
 
 void Projectile::Render() {
-	_projectileSprite->RenderWithOrientation(_position, _orientation);
+	_sprite->RenderWithOrientation(_position, _orientation);
 }
 
 const Circle Projectile::GetCollider() const {
 	return _circleCollider;
 }
 
-const DamageType Projectile::GetDamageType() const {
-	return _damageType;
+const ProjectileType Projectile::GetProjectileType() const {
+	return _projectileType;
 }
 
-const unsigned int Projectile::GetProjectileID() const {
-	return _projectileID;
+const unsigned int Projectile::GetObjectID() const {
+	return _objectID;
 }
 
-Sprite* Projectile::GetSprite() {
-	return _projectileSprite;
+const Sprite* Projectile::GetSprite() const {
+	return _sprite;
 }
 
-float Projectile::GetOrientation() {
+const float Projectile::GetOrientation() const {
 	return _orientation;
 }
 
@@ -61,7 +60,7 @@ const unsigned int Projectile::GetProjectileDamage() const {
 	return _projectileDamage;
 }
 
-Vector2<float> Projectile::GetPosition() {
+const Vector2<float> Projectile::GetPosition() const {
 	return _position;
 }
 
@@ -75,14 +74,14 @@ void Projectile::SetOrientation(float orientation) {
 
 void Projectile::SetPosition(Vector2<float> position) {
 	_position = position;
-	_circleCollider.position = _position + _direction * (_projectileSprite->h * 0.25f);
+	_circleCollider.position = _position + _direction * (_sprite->h * 0.25f);
 }
 
 void Projectile::ActivateProjectile(float orientation, Vector2<float> direction, Vector2<float> position) {
 	_orientation = orientation;
 	_direction = direction.normalized();
 	_position = position;
-	_circleCollider.position = _position + _direction * (_projectileSprite->h * 0.25f);
+	_circleCollider.position = _position + _direction * (_sprite->h * 0.25f);
 }
 
 void Projectile::DeactivateProjectile() {

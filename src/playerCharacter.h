@@ -21,7 +21,6 @@ public:
 
 	void TakeDamage(unsigned int damageAmount);
 
-
 	const Circle GetCircleCollider() const;
 
 	Sprite* GetSprite();
@@ -38,6 +37,7 @@ private:
 	void UpdateInput();
 	void UpdateMovement();
 	void UpdateTarget();
+
 	Circle _circleCollider;
 
 	const float _attackDamage = 10;

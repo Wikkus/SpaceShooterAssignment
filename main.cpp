@@ -13,7 +13,6 @@
 #include "src/dataStructuresAndMethods.h"
 #include "src/debugDrawer.h"
 #include "src/enemyBase.h"
-#include "src/enemyFighter.h"
 #include "src/enemyManager.h"
 #include "src/gameEngine.h"
 #include "src/ImGuiManager.h"
@@ -46,12 +45,6 @@ int main(int argc, char* argv[]) {
 		0.f, Vector2<float>(windowWidth * 0.5f, windowHeight * 0.5f));
 
 	timerManager = std::make_shared<TimerManager>();
-
-	QuadTreeNode quadTreeNode;
-	quadTreeNode.rectangle = AABB::makeFromPositionSize(
-		Vector2(windowWidth * 0.5f, windowHeight * 0.5f), windowHeight, windowWidth);
-	enemyQuadTree = new QuadTreeTemp<EnemyBase*>(quadTreeNode, 50);
-	projectileQuadTree = new QuadTreeTemp<Projectile*>(quadTreeNode, 50);
 
 	separationBehaviour = std::make_shared<SeparationBehaviour>();
 
@@ -135,8 +128,8 @@ int main(int argc, char* argv[]) {
 		playerCharacter->Render();
 		projectileManager->Render();
 
-		enemyQuadTree->ClearTemp();
-		projectileQuadTree->ClearTemp();
+		enemyManager->ClearEnemyQuadTree();
+		projectileManager->ClearProjectileQuadTree();
 
 		//Render text here
 		fpsText->ChangeText(std::to_string(1 / deltaTime).c_str(), { 255, 255, 255, 255 });

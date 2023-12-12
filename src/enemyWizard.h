@@ -6,7 +6,7 @@
 
 class EnemyWizard : public EnemyBase {
 public:
-	EnemyWizard(unsigned int enemyID);
+	EnemyWizard(unsigned int objectID, int attackDamage, float attackRange, float movementSpeed);
 	~EnemyWizard();
 
 	void Init() override;
@@ -21,11 +21,11 @@ public:
 	const float GetAttackRange() const override;
 	const float GetOrientation() const override;
 	const int GetCurrentHealth() const override;
-	const unsigned int GetEnemyID() const override;
+	const unsigned int GetObjectID() const override;
 	const Sprite* GetSprite() const override;
 	const std::shared_ptr<Timer> GetAttackTimer() const override;
 	const Vector2<float> GetPosition() const override;
-	const std::vector<EnemyBase*> GetQueriedEnemies() const override;
+	const std::vector<std::shared_ptr<EnemyBase>> GetQueriedEnemies() const override;
 
 	void ActivateEnemy(float orienation, Vector2<float> direction, Vector2<float> position) override;
 	void DeactivateEnemy() override;
@@ -34,11 +34,5 @@ public:
 private:
 	void UpdateMovement();
 	void UpdateTarget();
-
-	const float _attackRange = 200.f;
-	const float _movementSpeed = 30.f;
-	const unsigned int _attackDamage = 1;
-
-
 };
 

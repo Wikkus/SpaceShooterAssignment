@@ -1,5 +1,7 @@
 #include "dataStructuresAndMethods.h"
 #include "gameEngine.h"
+#include "objectBase.h"
+
 
 bool IsInDistance(Vector2<float> positionA, Vector2<float> positionB, float distance) {
 	return Vector2<float>::distanceBetweenVectors(positionA, positionB) <= distance;
@@ -39,3 +41,64 @@ float WrapMinMax(float rotation, float minValue, float maxValue) {
 	return minValue + WrapMax(rotation - minValue, maxValue - minValue);
 }
 
+/*
+
+int BinarySearch(std::vector<std::shared_ptr<ObjectBase>> objectVector, int low, int high, int targetID) {
+	while (low <= high) {
+		int mid = low + (high - low) / 2;
+
+		if (objectVector[mid]->GetObjectID() == targetID) {
+			return mid;
+		}
+
+		if (objectVector[mid]->GetObjectID() < targetID) {
+			low = mid + 1;
+		}
+		else {
+			high = mid - 1;
+		}
+	}
+	return -1;
+}
+
+int Partition(std::vector<std::shared_ptr<ObjectBase>> objectVector, int start, int end) {
+	int pivot = objectVector[start]->GetObjectID();
+
+	int count = 0;
+	for (int i = start + 1; i <= end; i++) {
+		if (objectVector[i]->GetObjectID() <= pivot) {
+			count++;
+		}
+	}
+
+	int pivotIndex = start + count;
+	std::swap(objectVector[pivotIndex], objectVector[start]);
+
+	int i = start, k = end;
+
+	while (i < pivotIndex && k > pivotIndex) {
+
+		while (objectVector[i]->GetObjectID() <= pivot) {
+			i++;
+		}
+
+		while (objectVector[k]->GetObjectID() > pivot) {
+			k--;
+		}
+
+		if (i < pivotIndex && k > pivotIndex) {
+			std::swap(objectVector[i++], objectVector[k--]);
+		}
+	}
+	return pivotIndex;
+}
+void QuickSort(std::vector<std::shared_ptr<ObjectBase>> objectVector, int start, int end) {
+	if (start >= end) {
+		return;
+	}
+	int p = Partition(objectVector, start, end);
+
+	QuickSort(objectVector, start, p - 1);
+	QuickSort(objectVector, p + 1, end);
+}
+*/

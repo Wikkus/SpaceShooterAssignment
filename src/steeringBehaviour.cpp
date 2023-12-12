@@ -12,7 +12,7 @@ SteeringOutput SeparationBehaviour::Steering(EnemyBase* enemyData) {
 	_strength = 0.f;
 
 	for (unsigned int i = 0; i < enemyData->GetQueriedEnemies().size(); i++) {
-		if (enemyData->GetEnemyID() == enemyData->GetQueriedEnemies()[i]->GetEnemyID()) {
+		if (enemyData->GetObjectID() == enemyData->GetQueriedEnemies()[i]->GetObjectID()) {
 			continue;
 		}
 		_targetPosition = enemyData->GetQueriedEnemies()[i]->GetPosition();

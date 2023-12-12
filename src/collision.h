@@ -2,8 +2,8 @@
 #include "vector2.h"
 
 struct Circle {
-	float radius;
-	Vector2<float> position;
+	float radius = 0.f;
+	Vector2<float> position = { 0.f, 0.f };
 };
 
 struct Collision {

@@ -2,6 +2,7 @@
 
 #include "dataStructuresAndMethods.h"
 #include "debugDrawer.h"
+#include "enemyBase.h"
 #include "enemyManager.h"
 #include "gameEngine.h"
 #include "projectile.h"
@@ -79,11 +80,11 @@ void PlayerCharacter::ExecuteDeath() {
 }
 
 void PlayerCharacter::FireProjectile() {	
-	projectileManager->SpawnProjectile(DamageType::DamageEnemy, _orientation, _direction, _position);
+	projectileManager->SpawnProjectile(ProjectileType::PlayerProjectile, _orientation, _attackDamage, _direction, _position);
 }
 
 void PlayerCharacter::UpdateCollision() {
-	std::vector<EnemyBase*> enemies = enemyQuadTree->QueryTemp(_circleCollider);
+	std::vector<std::shared_ptr<EnemyBase>> enemies = enemyManager->GetEnemyQuadTree()->Query(_circleCollider);
 	for (unsigned int i = 0; i < enemies.size(); i++) {
 		if (enemies[i]->GetEnemyType() != EnemyType::EnemyFighter) {
 			continue;
@@ -93,10 +94,13 @@ void PlayerCharacter::UpdateCollision() {
 			enemies[i]->ExecuteAttack();
 		}
 	}
-	std::vector<Projectile*> porjectilesHit = projectileQuadTree->QueryTemp(_circleCollider);
+	std::vector<std::shared_ptr<Projectile>> porjectilesHit = projectileManager->GetProjectileQuadTree()->Query(_circleCollider);
 	for (unsigned int i = 0; i < porjectilesHit.size(); i++) {
+		if (porjectilesHit[i]->GetProjectileType() == ProjectileType::PlayerProjectile) {
+			continue;
+		}
 		TakeDamage(porjectilesHit[i]->GetProjectileDamage());
-		projectileManager->RemoveProjectile(DamageType::DamagePlayer, porjectilesHit[i]->GetProjectileID());
+		projectileManager->RemoveProjectile(porjectilesHit[i]->GetProjectileType(), porjectilesHit[i]->GetObjectID());
 	}
 }
 
@@ -145,7 +149,6 @@ void PlayerCharacter::UpdateMovement() {
 		_position.y = _oldPosition.y;
 	}
 	_circleCollider.position = _position;
-	debugDrawer->AddDebugCircle(_position, _circleCollider.radius);
 }
 
 void PlayerCharacter::UpdateTarget() {

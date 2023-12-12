@@ -9,9 +9,8 @@
 #include "steeringBehaviour.h"
 #include "timerManager.h"
 
-EnemyWizard::EnemyWizard(unsigned int enemyID) : EnemyBase(enemyID) {
-	_id = enemyID;
-
+EnemyWizard::EnemyWizard(unsigned int objectID, int attackDamage, float attackRange, float movementSpeed) : 
+	EnemyBase(objectID, attackDamage, attackRange, movementSpeed) {
 	_sprite = new Sprite();
 	_sprite->Load("res/sprites/CoralineDadWizard.png");
 
@@ -20,6 +19,10 @@ EnemyWizard::EnemyWizard(unsigned int enemyID) : EnemyBase(enemyID) {
 	_circleCollider.position = _position;
 	_circleCollider.radius = 12.f;
 	
+	_attackDamage = attackDamage;
+	_attackRange = attackRange;
+	_movementSpeed = movementSpeed;
+
 	_maxHealth = 20;
 	_currentHealth = _maxHealth;
 	_enemyType = EnemyType::EnemyWizard;
@@ -43,7 +46,7 @@ void EnemyWizard::Update() {
 	UpdateTarget();
 	UpdateMovement();
 
-	_queriedEnemies = enemyQuadTree->QueryTemp(_circleCollider);
+	_queriedEnemies = enemyManager->GetEnemyQuadTree()->Query(_circleCollider);
 	if (IsInDistance(_position, playerCharacter->GetPosition(), _attackRange) && _attackTimer->GetTimerFinished()) {
 		ExecuteAttack();
 	}
@@ -77,8 +80,8 @@ const int EnemyWizard::GetCurrentHealth() const {
 	return _currentHealth;
 }
 
-const unsigned int EnemyWizard::GetEnemyID() const {
-	return _id;
+const unsigned int EnemyWizard::GetObjectID() const {
+	return _objectID;
 }
 
 const Sprite* EnemyWizard::GetSprite() const {
@@ -93,7 +96,7 @@ const Vector2<float> EnemyWizard::GetPosition() const {
 	return _position;
 }
 
-const std::vector<EnemyBase*> EnemyWizard::GetQueriedEnemies() const {
+const std::vector<std::shared_ptr<EnemyBase>> EnemyWizard::GetQueriedEnemies() const {
 	return _queriedEnemies;
 }
 
@@ -102,14 +105,15 @@ void EnemyWizard::ActivateEnemy(float orienation, Vector2<float> direction, Vect
 	_direction = direction;
 	_position = position;
 	_circleCollider.position = position;
+	Init();
 }
 
 void EnemyWizard::DeactivateEnemy() {
 	_orientation = 0.f;
-	_id = -1;
 	_direction = Vector2<float>(0.f, 0.f);
 	_position = Vector2<float>(-10000.f, -10000.f);
 	_circleCollider.position = _position;
+	_attackTimer->DeactivateTimer();
 }
 
 bool EnemyWizard::TakeDamage(unsigned int damageAmount) {
@@ -121,7 +125,7 @@ bool EnemyWizard::TakeDamage(unsigned int damageAmount) {
 }
 
 void EnemyWizard::ExecuteAttack() {
-	projectileManager->SpawnProjectile(DamageType::DamagePlayer, _orientation, _direction, _position);
+	projectileManager->SpawnProjectile(ProjectileType::EnemyProjectile, _orientation, _attackDamage, _direction, _position);
 	_attackTimer->ResetTimer();
 }
 

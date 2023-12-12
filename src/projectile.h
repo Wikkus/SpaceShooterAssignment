@@ -1,17 +1,18 @@
 #pragma once
 #include "collision.h"
+#include "objectBase.h"
 #include "sprite.h"
 #include "vector2.h"
 
-enum class DamageType {
-	DamageEnemy,
-	DamagePlayer,
+enum class ProjectileType {
+	EnemyProjectile,
+	PlayerProjectile,
 	Count
 };
 
-class Projectile {
+class Projectile : public ObjectBase {
 public:
-	Projectile(DamageType damageType, unsigned int projectileDamage, unsigned int projectileID);
+	Projectile(ProjectileType damageType, unsigned int projectileDamage, unsigned int objectID);
 	~Projectile();
 
 	void Init();
@@ -19,14 +20,13 @@ public:
 	void Render();
 	
 	const Circle GetCollider() const;
-	const DamageType GetDamageType() const;
-	const unsigned int GetProjectileID() const;
+	const ProjectileType GetProjectileType() const;
 	const unsigned int GetProjectileDamage() const;
 	
-
-	float GetOrientation(); 
-	Sprite* GetSprite();
-	Vector2<float> GetPosition();
+	const unsigned int GetObjectID() const;
+	const float GetOrientation() const;
+	const Sprite* GetSprite() const;
+	const Vector2<float> GetPosition() const;
 	
 	void SetDirection(Vector2<float> direction);
 	void SetOrientation(float orientation);
@@ -41,16 +41,10 @@ private:
 	const float _projectileSpeed = 200.f;
 	const float _spriteCollisionOffset = 8.f;
 
-	DamageType _damageType = DamageType::Count;
-		
-	float _orientation = 0.f;
+	ProjectileType _projectileType = ProjectileType::Count;	
 
-	unsigned int _projectileID = -1;
-	unsigned int _projectileDamage = 0;
+	unsigned int _projectileDamage;
 
-	Sprite* _projectileSprite = nullptr;
-	
 	Vector2<float> _direction = Vector2<float>(0.f, 0.f);
-	Vector2<float> _position = Vector2<float>(-10000.f, 10000.f);
 };
 

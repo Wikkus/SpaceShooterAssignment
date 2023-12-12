@@ -8,9 +8,8 @@
 #include "steeringBehaviour.h"
 #include "timerManager.h"
 
-EnemyFighter::EnemyFighter(unsigned int enemyID) : EnemyBase(enemyID) {
-	_id = enemyID;
-	
+EnemyFighter::EnemyFighter(unsigned int objectID, int attackDamage, float attackRange, float movementSpeed) : 
+	EnemyBase(objectID, attackDamage, attackRange, movementSpeed) {
 	_sprite = new Sprite();
 	_sprite->Load("res/sprites/CoralineDadFighter.png");
 
@@ -21,6 +20,10 @@ EnemyFighter::EnemyFighter(unsigned int enemyID) : EnemyBase(enemyID) {
 
 	_maxHealth = 30;
 	_currentHealth = _maxHealth;
+
+	_attackDamage = attackDamage;
+	_attackRange = attackRange;
+	_movementSpeed = movementSpeed;
 
 	_enemyType = EnemyType::EnemyFighter;
 }
@@ -39,7 +42,7 @@ void EnemyFighter::Init() {
 
 void EnemyFighter::Update() {
 	UpdateTarget();
-	_queriedEnemies = enemyQuadTree->QueryTemp(_circleCollider);
+	_queriedEnemies = enemyManager->GetEnemyQuadTree()->Query(_circleCollider);
 	UpdateMovement();
 }
 
@@ -74,8 +77,8 @@ const int EnemyFighter::GetCurrentHealth() const {
 	return _currentHealth;
 }
 
-const unsigned int EnemyFighter::GetEnemyID() const {
-	return _id;
+const unsigned int EnemyFighter::GetObjectID() const {
+	return _objectID;
 }
 
 const Sprite* EnemyFighter::GetSprite() const {
@@ -86,7 +89,7 @@ const Vector2<float> EnemyFighter::GetPosition() const {
 	return _position;
 }
 
-const std::vector<EnemyBase*> EnemyFighter::GetQueriedEnemies() const {
+const std::vector<std::shared_ptr<EnemyBase>> EnemyFighter::GetQueriedEnemies() const {
 	return _queriedEnemies;
 }
 
@@ -95,14 +98,15 @@ void EnemyFighter::ActivateEnemy(float orienation, Vector2<float> direction, Vec
 	_direction = direction;
 	_position = position;
 	_circleCollider.position = _position;
+	Init();
 }
 
 void EnemyFighter::DeactivateEnemy() {
 	_orientation = 0.f;
-	_id = -1;
 	_direction = Vector2<float>(0.f, 0.f);
 	_position = Vector2<float>(-10000.f, -10000.f);
 	_circleCollider.position = _position;
+	_attackTimer->DeactivateTimer();
 }
 
 bool EnemyFighter::TakeDamage(unsigned int damageAmount) {

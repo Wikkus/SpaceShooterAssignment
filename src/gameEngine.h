@@ -11,14 +11,11 @@
 #define eulersNumber 2.71828
 
 class DebugDrawer;
-class EnemyBase;
 class EnemyManager;
 class ImGuiHandler;
 class PlayerCharacter;
-class Projectile;
 class ProjectileManager;
 class SteeringBehaviour;
-template<typename T> class QuadTreeTemp;
 class TimerManager;
 
 extern SDL_Window* window;
@@ -31,9 +28,6 @@ extern std::shared_ptr<PlayerCharacter> playerCharacter;
 extern std::shared_ptr<ProjectileManager> projectileManager;
 
 extern std::shared_ptr<SteeringBehaviour> separationBehaviour;
-
-extern QuadTreeTemp<EnemyBase*>* enemyQuadTree;
-extern QuadTreeTemp<Projectile*>* projectileQuadTree;
 
 extern std::shared_ptr<TimerManager> timerManager;
 

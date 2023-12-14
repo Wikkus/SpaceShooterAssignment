@@ -4,10 +4,10 @@
 #include "sprite.h"
 #include "vector2.h"
 
-class EnemyWizard : public EnemyBase {
+class EnemyBoar : public EnemyBase {
 public:
-	EnemyWizard(unsigned int objectID, int attackDamage, float attackRange, float movementSpeed);
-	~EnemyWizard();
+	EnemyBoar(unsigned int objectID, int attackDamage, int maxHealth, float attackRange, float movementSpeed);
+	~EnemyBoar();
 
 	void Init() override;
 	void Update() override;
@@ -29,10 +29,13 @@ public:
 
 	void ActivateEnemy(float orienation, Vector2<float> direction, Vector2<float> position) override;
 	void DeactivateEnemy() override;
-	void ExecuteAttack() override;
+	void HandleAttack() override;
 
 private:
 	void UpdateMovement();
 	void UpdateTarget();
+	
+	float _attackRange = 0.f;
+	int _attackDamage = 0;
 };
 

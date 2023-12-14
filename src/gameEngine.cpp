@@ -5,6 +5,7 @@
 #include "imGuiManager.h"
 #include "playerCharacter.h"
 #include "projectileManager.h"
+#include "stateStack.h"
 #include "steeringBehaviour.h"
 #include "timerManager.h"
 
@@ -15,11 +16,15 @@ SDL_Renderer* renderer;
 
 std::shared_ptr<EnemyManager> enemyManager;
 std::shared_ptr<DebugDrawer> debugDrawer;
+std::shared_ptr<GameStateHandler> gameStateHandler;
 std::shared_ptr<ImGuiHandler> imGuiHandler;
 std::shared_ptr<PlayerCharacter> playerCharacter;
 std::shared_ptr<ProjectileManager> projectileManager;
 std::shared_ptr<SteeringBehaviour> separationBehaviour;
 std::shared_ptr<TimerManager> timerManager;
+std::unordered_map<ButtonType, std::shared_ptr<Button>> _buttons;
+
+bool runningGame = false;
 
 float windowHeight = 600.f;
 float windowWidth = 800.f;

@@ -8,21 +8,19 @@
 class Timer;
 
 enum class EnemyType {
-	EnemyFighter,
-	EnemyWizard,
+	Boar,
+	CoralineDad,
 	Count
 };
 
 class EnemyBase : public ObjectBase {
 public:
-	EnemyBase(int objectID, int attackDamage, float attackRange, float movementSpeed) : ObjectBase(objectID) {}
+	EnemyBase(int objectID) : ObjectBase(objectID) {}
 	~EnemyBase() {}
 
 	virtual void Init() = 0;
 	virtual void Update() = 0;
 	virtual void Render() = 0;
-
-	virtual void ExecuteAttack() = 0;
 
 	virtual bool TakeDamage(unsigned int damageAmount) = 0;
 
@@ -36,12 +34,12 @@ public:
 	virtual const unsigned int GetObjectID() const = 0;
 	virtual const Sprite* GetSprite() const = 0;
 	virtual const Vector2<float> GetPosition() const = 0;
-
 	virtual const std::shared_ptr<Timer> GetAttackTimer() const = 0;
 	virtual const std::vector<std::shared_ptr<EnemyBase>> GetQueriedEnemies() const = 0;
 	
 	virtual void ActivateEnemy(float orienation, Vector2<float> direction, Vector2<float> position) = 0;
 	virtual void DeactivateEnemy() = 0;
+	virtual void HandleAttack() = 0;
 
 protected:
 	Circle _circleCollider;	
@@ -58,8 +56,7 @@ protected:
 
 	EnemyType _enemyType = EnemyType::Count;
 
-	float _attackRange = 0.f;
 	float _movementSpeed = 0.f;
-	int _attackDamage = 0;
+
 };
 

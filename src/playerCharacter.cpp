@@ -2,18 +2,18 @@
 
 #include "dataStructuresAndMethods.h"
 #include "debugDrawer.h"
-#include "enemyBase.h"
 #include "enemyManager.h"
 #include "gameEngine.h"
 #include "projectile.h"
 #include "projectileManager.h"
+#include "stateStack.h"
 #include "timerManager.h"
 #include "quadTree.h"
 
 #include <string>
 
 PlayerCharacter::PlayerCharacter(const char* spritePath, float characterOrientation, Vector2<float> characterPosition) {
-	_characterSprite = new Sprite();
+	_characterSprite = std::make_shared<Sprite>();
 	_characterSprite->Load(spritePath);
 
 	_orientation = characterOrientation;
@@ -25,17 +25,11 @@ PlayerCharacter::PlayerCharacter(const char* spritePath, float characterOrientat
 	_circleCollider.position = characterPosition;
 	_circleCollider.radius = 16.f;
 
-	_healthTextSprite = new TextSprite();
+	_healthTextSprite = std::make_shared<TextSprite>();
 	_healthTextSprite->SetPosition(Vector2<float>(windowWidth * 0.05f, windowHeight * 0.9f));
 }
 
-PlayerCharacter::~PlayerCharacter() {
-	_characterSprite = nullptr;
-	delete _characterSprite;
-
-	_healthTextSprite = nullptr;
-	delete _healthTextSprite;
-}
+PlayerCharacter::~PlayerCharacter() {}
 
 void PlayerCharacter::Init() {
 	_healthTextSprite->Init("res/roboto.ttf", 24, std::to_string(_currentHealth).c_str(), { 255, 255, 255, 255 });
@@ -62,38 +56,34 @@ void PlayerCharacter::RenderText() {
 void PlayerCharacter::TakeDamage(unsigned int damageAmount) {
 	_currentHealth -= damageAmount;
 	
-	_healthTextSprite->ChangeText(std::to_string(_currentHealth).c_str(), { 255, 255, 255, 255 });
 	if (_currentHealth <= 0) {
+		_currentHealth = 0;
 		ExecuteDeath();
 	}
+	_healthTextSprite->ChangeText(std::to_string(_currentHealth).c_str(), { 255, 255, 255, 255 });
 }
 
 void PlayerCharacter::ExecuteDeath() {
-	_position = Vector2<float>(windowWidth * 0.5f, windowHeight * 0.5f);
-	_orientation = 0.f;
-
-	enemyManager->RemoveAllEnemies();
-	projectileManager->RemoveAllProjectiles();
-
-	_currentHealth = _maxHealth;
-	_healthTextSprite->ChangeText(std::to_string(_currentHealth).c_str(), { 255, 255, 255, 255 });
+	gameStateHandler->ReplaceCurrentState(std::make_shared<GameOverState>());
 }
 
 void PlayerCharacter::FireProjectile() {	
 	projectileManager->SpawnProjectile(ProjectileType::PlayerProjectile, _orientation, _attackDamage, _direction, _position);
 }
 
+void PlayerCharacter::Respawn() {
+	_position = Vector2<float>(windowWidth * 0.5f, windowHeight * 0.5f);
+	_orientation = 0.f;
+	_attackTimer->ResetTimer();
+
+	_currentHealth = _maxHealth;
+	_healthTextSprite->ChangeText(std::to_string(_currentHealth).c_str(), { 255, 255, 255, 255 });
+
+	enemyManager->RemoveAllEnemies();
+	projectileManager->RemoveAllProjectiles();
+}
+
 void PlayerCharacter::UpdateCollision() {
-	std::vector<std::shared_ptr<EnemyBase>> enemies = enemyManager->GetEnemyQuadTree()->Query(_circleCollider);
-	for (unsigned int i = 0; i < enemies.size(); i++) {
-		if (enemies[i]->GetEnemyType() != EnemyType::EnemyFighter) {
-			continue;
-		}
-		if (IsInDistance(enemies[i]->GetPosition(), _position, enemies[i]->GetAttackRange()) &&
-			enemies[i]->GetAttackTimer()->GetTimerFinished()) {
-			enemies[i]->ExecuteAttack();
-		}
-	}
 	std::vector<std::shared_ptr<Projectile>> porjectilesHit = projectileManager->GetProjectileQuadTree()->Query(_circleCollider);
 	for (unsigned int i = 0; i < porjectilesHit.size(); i++) {
 		if (porjectilesHit[i]->GetProjectileType() == ProjectileType::PlayerProjectile) {
@@ -118,15 +108,18 @@ void PlayerCharacter::UpdateHealthRegen() {
 }
 
 void PlayerCharacter::UpdateInput() {
-	if (_attackTimer->GetTimerFinished()) {
-		if (GetMouseButton(SDL_BUTTON_LEFT)) {
+	if (GetMouseButton(SDL_BUTTON_LEFT)) {
+		if (_attackTimer->GetTimerFinished()) {
 			FireProjectile();
 			_attackTimer->ResetTimer();
 		}
 	}
+	if (GetKeyPressed(SDL_SCANCODE_ESCAPE)) {
+		gameStateHandler->AddState(std::make_shared<PauseState>());
+	}
 }
 
-void PlayerCharacter::UpdateMovement() {
+void PlayerCharacter::UpdateMovement() { 
 	_oldPosition = _position;
 	if (GetKey(SDL_SCANCODE_W)) {
 		_position.y -= _movementSpeed * deltaTime;
@@ -154,14 +147,13 @@ void PlayerCharacter::UpdateMovement() {
 void PlayerCharacter::UpdateTarget() {
 	_direction = GetCursorPosition() - _position;
 	_orientation = VectorAsOrientation(_direction);
-
 }
 
 const Circle PlayerCharacter::GetCircleCollider() const {
 	return _circleCollider;
 }
 
-Sprite* PlayerCharacter::GetSprite() {
+std::shared_ptr<Sprite> PlayerCharacter::GetSprite() {
 	return _characterSprite;
 }
 

@@ -98,9 +98,6 @@ T Vector2<T>::absolute() const{
 }
 template<typename T>
 T Vector2<T>::distanceBetweenVectors(Vector2 vectorA, Vector2 vectorB) {
-	T temp = vectorA.x - vectorB.x;
-	T temp2 = vectorA.y - vectorB.y;
-
 	return sqrt(((vectorA.x - vectorB.x) * (vectorA.x - vectorB.x)) +
 		((vectorA.y - vectorB.y) * (vectorA.y - vectorB.y)));
 }

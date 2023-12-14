@@ -1,7 +1,7 @@
 #include "projectile.h"
 
 #include "debugDrawer.h"
-#include "enemyFighter.h"
+#include "enemyBoar.h"
 #include "enemyManager.h"
 #include "gameEngine.h"
 

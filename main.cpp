@@ -21,6 +21,7 @@
 #include "src/quadTree.h"
 #include "src/sprite.h"
 #include "src/spriteSheet.h"
+#include "src/stateStack.h"
 #include "src/steeringBehaviour.h"
 #include "src/timerManager.h"
 #include "src/textSprite.h"
@@ -38,6 +39,7 @@ int main(int argc, char* argv[]) {
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 	enemyManager = std::make_shared<EnemyManager>();
+	gameStateHandler = std::make_shared<GameStateHandler>();
 	debugDrawer = std::make_shared<DebugDrawer>();
 	imGuiHandler = std::make_shared<ImGuiHandler>();
 	projectileManager = std::make_shared<ProjectileManager>();
@@ -45,7 +47,6 @@ int main(int argc, char* argv[]) {
 		0.f, Vector2<float>(windowWidth * 0.5f, windowHeight * 0.5f));
 
 	timerManager = std::make_shared<TimerManager>();
-
 	separationBehaviour = std::make_shared<SeparationBehaviour>();
 
 	//Init here
@@ -54,12 +55,14 @@ int main(int argc, char* argv[]) {
 	playerCharacter->Init();
 	projectileManager->Init();
 
-	TextSprite* fpsText = new TextSprite();
+	gameStateHandler->AddState(std::make_shared<MenuState>());
+
+	std::shared_ptr<TextSprite> fpsText = std::make_shared<TextSprite>();
 	fpsText->Init("res/roboto.ttf", 24, std::to_string(0).c_str(), { 255, 255, 255,255});
 
 	Uint64 previous_ticks = SDL_GetPerformanceCounter();
-	bool running = true;
-	while (running) {
+	runningGame = true;
+	while (runningGame) {
 		ImGui_ImplSDL2_NewFrame(window);
 		ImGui::NewFrame();
 
@@ -69,13 +72,12 @@ int main(int argc, char* argv[]) {
 		previous_ticks = ticks;
 		deltaTime = (float)delta_ticks / (float)SDL_GetPerformanceFrequency();
 
-
 		SDL_Event eventType;
 		while (SDL_PollEvent(&eventType)) {
 			ImGui_ImplSDL2_ProcessEvent(&eventType);
 			switch (eventType.type) {
 				case SDL_QUIT: {
-					running = false;
+					runningGame = false;
 					break;
 				}
 				case SDL_KEYDOWN: {
@@ -83,10 +85,6 @@ int main(int argc, char* argv[]) {
 					if (eventType.key.repeat) {
 						break;
 					}
-					if (scanCode == SDL_SCANCODE_ESCAPE) {
-						running = false;
-					}
-			
 					keys[scanCode].changeFrame = frameNumber;
 					keys[scanCode].state = true;
 					break;
@@ -111,22 +109,19 @@ int main(int argc, char* argv[]) {
 				}
 			}
 		}
+
 		//Update here
-		enemyManager->UpdateQuadTree();
-		projectileManager->UpdateQuadTree();
+		gameStateHandler->UpdateState();
 
-		enemyManager->Update();
-		projectileManager->Update();
-		playerCharacter->Update();
-		timerManager->Update();
-
-		SDL_SetRenderDrawColor(renderer, 0, 125, 0, 255);
+		SDL_SetRenderDrawColor(renderer, 75, 75, 75, 255);
 		SDL_RenderClear(renderer);
 
 		//Render images here
-		enemyManager->Render();
-		playerCharacter->Render();
-		projectileManager->Render();
+		gameStateHandler->RenderState();
+
+		debugDrawer->DrawBoxes();
+		debugDrawer->DrawCircles();
+		debugDrawer->DrawLines();
 
 		enemyManager->ClearEnemyQuadTree();
 		projectileManager->ClearProjectileQuadTree();
@@ -134,11 +129,7 @@ int main(int argc, char* argv[]) {
 		//Render text here
 		fpsText->ChangeText(std::to_string(1 / deltaTime).c_str(), { 255, 255, 255, 255 });
 		fpsText->Render();
-		playerCharacter->RenderText();
-
-		debugDrawer->DrawBoxes();
-		debugDrawer->DrawCircles();
-		debugDrawer->DrawLines();
+		gameStateHandler->RenderStateText();
 
 		imGuiHandler->Render();
 

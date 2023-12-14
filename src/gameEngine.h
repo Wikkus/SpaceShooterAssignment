@@ -5,31 +5,37 @@
 #include <SDL2/SDL_scancode.h>
 
 #include <random>
+#include <unordered_map>
 #include <vector>
 
 #define PI 3.14159265358979
 #define eulersNumber 2.71828
 
+class Button;
 class DebugDrawer;
 class EnemyManager;
+class GameStateHandler;
 class ImGuiHandler;
 class PlayerCharacter;
 class ProjectileManager;
 class SteeringBehaviour;
 class TimerManager;
 
+enum class ButtonType;
+
 extern SDL_Window* window;
 extern SDL_Renderer* renderer;
 
 extern std::shared_ptr<EnemyManager> enemyManager;
 extern std::shared_ptr<DebugDrawer> debugDrawer;
+extern std::shared_ptr<GameStateHandler> gameStateHandler;
 extern std::shared_ptr<ImGuiHandler> imGuiHandler;
 extern std::shared_ptr<PlayerCharacter> playerCharacter;
 extern std::shared_ptr<ProjectileManager> projectileManager;
-
 extern std::shared_ptr<SteeringBehaviour> separationBehaviour;
-
 extern std::shared_ptr<TimerManager> timerManager;
+extern std::unordered_map<ButtonType, std::shared_ptr<Button>> _buttons;
+extern bool runningGame;
 
 extern float windowHeight;
 extern float windowWidth;

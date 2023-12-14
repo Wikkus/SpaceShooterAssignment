@@ -1,12 +1,14 @@
 #include "enemyManager.h"
 
 #include "enemyBase.h"
-#include "enemyFighter.h"
-#include "enemyWizard.h"
+#include "enemyBoar.h"
+#include "enemyCoralineDad.h"
 #include "gameEngine.h"
 #include "objectPool.h"
+#include "playerCharacter.h"
 #include "quadTree.h"
 #include "timerManager.h"
+#include "weaponComponent.h"
 
 EnemyManager::EnemyManager() {
 	QuadTreeNode quadTreeNode;
@@ -47,7 +49,6 @@ void EnemyManager::Render() {
 	for (unsigned i = 0; i < _activeEnemies.size(); i++) {
 		_activeEnemies[i]->Render();
 	}
-	_enemyQuadTree->Render();
 }
 
 std::vector<std::shared_ptr<EnemyBase>> EnemyManager::GetActiveEnemies() {
@@ -63,14 +64,13 @@ void EnemyManager::ClearEnemyQuadTree() {
 }
 
 void EnemyManager::CreateNewEnemy(EnemyType enemyType, float orientation, Vector2<float> direction, Vector2<float> position) {
-	std::shared_ptr<EnemyBase> newEnemy;
 	switch (enemyType) {
-	case EnemyType::EnemyFighter:
-		_enemyPools[enemyType]->PoolObject(std::make_shared<EnemyFighter>(_lastEnemyID, 2, 25.f, 75.f));
+	case EnemyType::Boar:
+		_enemyPools[enemyType]->PoolObject(std::make_shared<EnemyBoar>(_lastEnemyID, 1, 20, 15.f, 100.f));
 		break;
 
-	case EnemyType::EnemyWizard:
-		_enemyPools[enemyType]->PoolObject(std::make_shared<EnemyWizard>(_lastEnemyID, 2, 300.f, 75.f));
+	case EnemyType::CoralineDad:
+		_enemyPools[enemyType]->PoolObject(std::make_shared<EnemyCoralineDad>(_lastEnemyID, 15, 75.f));
 		break;
 	
 	default:
@@ -82,21 +82,21 @@ void EnemyManager::CreateNewEnemy(EnemyType enemyType, float orientation, Vector
 void EnemyManager::EnemySpawner() {
 	for (unsigned int i = 0; i < _spawnNumberOfEnemies; i++) {
 		std::uniform_int_distribution dist{ 0, 1 };
-		std::uniform_int_distribution enemyType{ 0, (int)EnemyType::Count - 1};
+		Vector2<float> spawnPosition = { 0.f, 0.f };
+
 		if (i < _spawnNumberOfEnemies * 0.5f) {
 			float distX = 0.f;
-			std::uniform_real_distribution<float> distY{ 10.f, windowHeight - 10.f };
+			std::uniform_real_distribution<float> distY{ 0.f, windowHeight };
 			int temp = dist(randomEngine);
 			if (temp == 0) {
 				distX = 0;
 			} else {
 				distX = windowWidth;
 			}
-			enemyManager->SpawnEnemy((EnemyType)enemyType(randomEngine), 0.f,
-				Vector2<float>(0.f, 0.f), Vector2<float>(distX, distY(randomEngine)));			
-			
+			spawnPosition = { distX, distY(randomEngine) };
+
 		} else {
-			std::uniform_real_distribution<float> distX{ 10.f, windowWidth - 10.f };
+			std::uniform_real_distribution<float> distX{ 0.f, windowWidth };
 			float distY = 0.f;
 			int temp = dist(randomEngine);
 			if (temp == 0) {
@@ -104,9 +104,14 @@ void EnemyManager::EnemySpawner() {
 			} else {
 				distY = windowHeight;
 			}
-			enemyManager->SpawnEnemy((EnemyType)enemyType(randomEngine), 0.f,
-				Vector2<float>(0.f, 0.f), Vector2<float>(distX(randomEngine), distY));
+			spawnPosition = { distX(randomEngine), distY };
 		}
+		if (i % 3 == 0) {
+			enemyManager->SpawnEnemy(EnemyType::Boar, 0.f, Vector2<float>(0.f, 0.f), spawnPosition);
+		} else {
+			enemyManager->SpawnEnemy(EnemyType::CoralineDad, 0.f, Vector2<float>(0.f, 0.f), spawnPosition);
+		}
+
 	}
 	_spawnTimer->ResetTimer();
 }

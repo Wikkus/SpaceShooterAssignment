@@ -82,7 +82,7 @@
     <ClCompile Include="src\projectileManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\enemyFighter.cpp">
+    <ClCompile Include="src\enemyBoar.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\enemyManager.cpp">
@@ -97,7 +97,7 @@
     <ClCompile Include="src\timer.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\enemyWizard.cpp">
+    <ClCompile Include="src\enemyCoralineDad.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\quadTree.cpp">
@@ -106,7 +106,16 @@
     <ClCompile Include="src\steeringBehaviour.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\binarySearch.cpp">
+    <ClCompile Include="src\objectPool.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\objectBase.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stateStack.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\weaponComponent.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -453,7 +462,7 @@
     <ClInclude Include="src\projectileManager.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\enemyFighter.h">
+    <ClInclude Include="src\enemyBoar.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\enemyManager.h">
@@ -468,7 +477,7 @@
     <ClInclude Include="src\timer.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\enemyWizard.h">
+    <ClInclude Include="src\enemyCoralineDad.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\quadTree.h">
@@ -477,7 +486,16 @@
     <ClInclude Include="src\steeringBehaviour.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\binarySearch.h">
+    <ClInclude Include="src\objectPool.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\objectBase.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stateStack.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\weaponComponent.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

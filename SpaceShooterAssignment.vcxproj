@@ -29,27 +29,30 @@
     <ClCompile Include="include\ImGui\imgui_tables.cpp" />
     <ClCompile Include="include\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="src\binarySearch.cpp" />
     <ClCompile Include="src\collision.cpp" />
     <ClCompile Include="src\dataStructuresAndMethods.cpp" />
     <ClCompile Include="src\debugDrawer.cpp" />
     <ClCompile Include="src\enemyBase.cpp" />
     <ClCompile Include="src\enemyManager.cpp" />
-    <ClCompile Include="src\enemyWizard.cpp" />
+    <ClCompile Include="src\enemyCoralineDad.cpp" />
     <ClCompile Include="src\gameEngine.cpp" />
     <ClCompile Include="src\imGuiManager.cpp" />
-    <ClCompile Include="src\enemyFighter.cpp" />
+    <ClCompile Include="src\enemyBoar.cpp" />
+    <ClCompile Include="src\objectBase.cpp" />
+    <ClCompile Include="src\objectPool.cpp" />
     <ClCompile Include="src\playerCharacter.cpp" />
     <ClCompile Include="src\projectile.cpp" />
     <ClCompile Include="src\projectileManager.cpp" />
     <ClCompile Include="src\quadTree.cpp" />
     <ClCompile Include="src\sprite.cpp" />
     <ClCompile Include="src\spriteSheet.cpp" />
+    <ClCompile Include="src\stateStack.cpp" />
     <ClCompile Include="src\steeringBehaviour.cpp" />
     <ClCompile Include="src\textSprite.cpp" />
     <ClCompile Include="src\timer.cpp" />
     <ClCompile Include="src\timerManager.cpp" />
     <ClCompile Include="src\vector2.cpp" />
+    <ClCompile Include="src\weaponComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\ImGui\imconfig.h" />
@@ -154,27 +157,30 @@
     <ClInclude Include="include\SDL2\SDL_version.h" />
     <ClInclude Include="include\SDL2\SDL_video.h" />
     <ClInclude Include="include\SDL2\SDL_vulkan.h" />
-    <ClInclude Include="src\binarySearch.h" />
     <ClInclude Include="src\collision.h" />
     <ClInclude Include="src\dataStructuresAndMethods.h" />
     <ClInclude Include="src\debugDrawer.h" />
     <ClInclude Include="src\enemyBase.h" />
     <ClInclude Include="src\enemyManager.h" />
-    <ClInclude Include="src\enemyWizard.h" />
+    <ClInclude Include="src\enemyCoralineDad.h" />
     <ClInclude Include="src\gameEngine.h" />
     <ClInclude Include="src\imGuiManager.h" />
-    <ClInclude Include="src\enemyFighter.h" />
+    <ClInclude Include="src\enemyBoar.h" />
+    <ClInclude Include="src\objectBase.h" />
+    <ClInclude Include="src\objectPool.h" />
     <ClInclude Include="src\playerCharacter.h" />
     <ClInclude Include="src\projectile.h" />
     <ClInclude Include="src\projectileManager.h" />
     <ClInclude Include="src\quadTree.h" />
     <ClInclude Include="src\sprite.h" />
     <ClInclude Include="src\spriteSheet.h" />
+    <ClInclude Include="src\stateStack.h" />
     <ClInclude Include="src\steeringBehaviour.h" />
     <ClInclude Include="src\textSprite.h" />
     <ClInclude Include="src\timer.h" />
     <ClInclude Include="src\timerManager.h" />
     <ClInclude Include="src\vector2.h" />
+    <ClInclude Include="src\weaponComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="include\SDL2\SDL_config.h.cmake" />

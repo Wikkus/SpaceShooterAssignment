@@ -18,12 +18,13 @@ public:
 
 	void ExecuteDeath();
 	void FireProjectile();
+	void Respawn();
 
 	void TakeDamage(unsigned int damageAmount);
 
 	const Circle GetCircleCollider() const;
 
-	Sprite* GetSprite();
+	std::shared_ptr<Sprite> GetSprite();
 
 	const float GetOrientation() const;	
 
@@ -49,8 +50,8 @@ private:
 
 	int _currentHealth = 0;
 
-	Sprite* _characterSprite = nullptr;
-	TextSprite* _healthTextSprite = nullptr;
+	std::shared_ptr<Sprite> _characterSprite = nullptr;
+	std::shared_ptr<TextSprite> _healthTextSprite = nullptr;
 
 	std::shared_ptr<Timer> _attackTimer = nullptr;
 	std::shared_ptr<Timer> _regenerationTimer = nullptr;

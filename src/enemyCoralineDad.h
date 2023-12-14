@@ -4,10 +4,12 @@
 #include "sprite.h"
 #include "vector2.h"
 
-class EnemyFighter : public EnemyBase {
+class WeaponComponent;
+
+class EnemyCoralineDad : public EnemyBase {
 public:
-	EnemyFighter(unsigned int objectID, int attackDamage, float attackRange, float movementSpeed);
-	~EnemyFighter();
+	EnemyCoralineDad(unsigned int objectID, int maxHealth, float movementSpeed);
+	~EnemyCoralineDad();
 
 	void Init() override;
 	void Update() override;
@@ -29,12 +31,13 @@ public:
 
 	void ActivateEnemy(float orienation, Vector2<float> direction, Vector2<float> position) override;
 	void DeactivateEnemy() override;
-	void ExecuteAttack() override;
+	void HandleAttack() override;
 
 private:
 	void UpdateMovement();
 	void UpdateTarget();
+	void PickWeapon();
 
-	void Separation();
+	std::shared_ptr<WeaponComponent> _weaponComponent = nullptr;
 };
 

@@ -57,3 +57,14 @@ That's all I can manage to do for this assignment. There are things that I want 
 
 I also want to create a better way to handle the enemies. A faster way to locate where the enemy should be inserted in the vector and to get a specific type of enemy in the same vector. So I can have more varieties of enemy types and let the vector with the parent class handle all enemies.
 Same goes for projectiles.
+
+
+
+#DesignPatternsAssignment
+Change the object pool so it's a template now. Now I am using quicksort and binary search to locate specific enemies and projectiles base on their ID.
+
+Created a StateStack which handles the different states of the game. Which makes it easier to jump between main menu screen, game state, pause screen and game over screen.
+
+Created a WeaponComponent class which one of the enemy uses. Now instead of using 2 different classes to have a ranged and melee enemy, I'm using 1 class that has a weapon component which decides if it's range or melee.
+
+

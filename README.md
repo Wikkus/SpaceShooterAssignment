@@ -1,4 +1,11 @@
-# SpceShooterAssignment
+
+#DesignPatternsAssignment
+Change the object pool so it's a template now. Now I am using quicksort and binary search to locate specific enemies and projectiles base on their ID.
+
+Created a StateStack which handles the different states of the game. Which makes it easier to jump between main menu screen, game state, pause screen and game over screen.
+
+Created a WeaponComponent class which one of the enemy uses. Now instead of using 2 different classes to have a ranged and melee enemy, I'm using 1 class that has a weapon component which decides if it's range or melee.
+# SpaceShooterAssignment
 
 Assignment for: FutureGames Computer Technology course.
 
@@ -59,12 +66,5 @@ I also want to create a better way to handle the enemies. A faster way to locate
 Same goes for projectiles.
 
 
-
-#DesignPatternsAssignment
-Change the object pool so it's a template now. Now I am using quicksort and binary search to locate specific enemies and projectiles base on their ID.
-
-Created a StateStack which handles the different states of the game. Which makes it easier to jump between main menu screen, game state, pause screen and game over screen.
-
-Created a WeaponComponent class which one of the enemy uses. Now instead of using 2 different classes to have a ranged and melee enemy, I'm using 1 class that has a weapon component which decides if it's range or melee.
 
 
